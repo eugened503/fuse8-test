@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PageSearch from '@/components/PageSearch.vue'
-import PageJoke from '@/components/PageJoke.vue'
+import PageSearch from '@/views/PageSearch.vue'
+import PageJoke from '@/views/PageJoke.vue'
 
 const routes = [
   {
@@ -9,7 +9,7 @@ const routes = [
     component: PageSearch
   },
   {
-    path: '/preview',
+    path: '/joke/:id',
     name: 'PageJoke',
     component: PageJoke
   }
