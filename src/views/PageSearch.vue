@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import AppInput from '../components/AppInput.vue'
-import AppJokes from '../components/AppJokes.vue'
+import AppInput from '@/components/AppInput.vue'
+import AppJokes from '@/components/AppJokes.vue'
 </script>
 
 <style lang="scss" scoped>

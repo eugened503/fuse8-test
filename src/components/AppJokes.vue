@@ -1,27 +1,54 @@
 <template>
-  <div class="jokes">
-    <router-link
-      :to="{ name: 'PageJoke', params: { id: joke.id } }"
-      v-for="joke in getJokes"
-      :key="joke.id"
-      class="jokes__item"
-    >
-      <p>{{ joke.value }}</p>
-      <div class="jokes__footer">
-        <p>{{ joke.id }}</p>
-        <p>{{ joke.date }}</p>
-      </div>
-    </router-link>
+  <div class="jokes-wrapper">
+    <div class="jokes">
+      <router-link
+        :to="{ name: 'PageJoke', params: { id: joke.id } }"
+        v-for="joke in getSliceJokes"
+        :key="joke.id"
+        class="jokes__item"
+      >
+        <p>{{ joke.value }}</p>
+        <div class="jokes__footer">
+          <p>{{ joke.id }}</p>
+          <p>{{ getDate(joke.created_at) }}</p>
+        </div>
+      </router-link>
+    </div>
+    <button v-if="getSliceJokes.length < getTotal" @click="incNumber">Показать еще</button>
   </div>
 </template>
 
 <script setup>
 import { useStoreJokes } from '@/stores/storeJokes'
 import { storeToRefs } from 'pinia'
-const { getJokes } = storeToRefs(useStoreJokes())
+import getDate from '@/helpers/getDate'
+
+const { getTotal, getSliceJokes } = storeToRefs(useStoreJokes())
+const { incNumber } = useStoreJokes()
 </script>
 
 <style lang="scss" scoped>
+.jokes-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  button {
+    display: block;
+    background: none;
+    border: none;
+    max-width: 140px;
+    background-color: $clr-purple;
+    color: $clr-white;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    margin: 30px auto 0;
+    cursor: pointer;
+  }
+}
 .jokes {
   display: flex;
   flex-wrap: wrap;
